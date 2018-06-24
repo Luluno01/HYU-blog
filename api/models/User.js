@@ -24,6 +24,11 @@ module.exports = {
     isBlogger: {
       type: 'boolean',
       defaultsTo: false
+    },
+
+    isAdmin: {
+      type: 'boolean',
+      defaultsTo: false
     }
   },
 

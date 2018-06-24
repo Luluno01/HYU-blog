@@ -71,6 +71,7 @@ module.exports = {
         let res = await User.validate(user, session.salt, inputs.password);
         if(res) {
           session.login = user.id;
+          session.isBlogger = user.isBlogger;
           sails.log.info(`User ${user.username} logged in`);
           return exits.success(M.LOGGED_IN);
         } else return exits.failed(M.USERNAME_OR_PASSWORD_INCORRECT);

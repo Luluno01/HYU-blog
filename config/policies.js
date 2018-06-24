@@ -9,7 +9,7 @@
  */
 
 module.exports.policies = {
-
+  
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions, unless overridden.       *
@@ -18,5 +18,24 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  UserController: {
+    //Require requests to come from a logged-in Blog Owner user
+    'logout': 'isLoggedIn',
+
+    //Require requests to come from a logged-in Blog Owner user or admin
+    'reset': 'isLoggedIn'
+
+  },
+
+  BlogController: {
+    //Require requests to come from a logged-in Blog Owner user
+    'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
+
+    //Require requests to come from a logged-in Blog Owner user or admin
+    'delete': 'authority',
+    
+    //Require requests to come from a logged-in Blog Owner user or admin
+    'update': 'authority'
+  }
 
 };

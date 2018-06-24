@@ -53,6 +53,7 @@ module.exports = {
         if(!user) {
           sails.log.error('No such logged-in user');
           delete session.login;
+          delete session.isBlogger;
           return exits.failed(M.INVALID_STATE);
         }
         return exits.success(user.salt);
@@ -72,6 +73,7 @@ module.exports = {
           // User not found
           sails.log.error('No such logged-in user');
           delete session.login;
+          delete session.isBlogger;
           delete session.reset;
           return exits.failed(M.INVALID_STATE);
         }
@@ -104,11 +106,13 @@ module.exports = {
           // User not found
           sails.log.error('No such logged-in user');
           delete session.login;
+          delete session.isBlogger;
           delete session.reset;
           return exits.failed(M.INVALID_STATE);
         }
         delete session.reset;
         delete session.login;  // Logout the user
+        delete session.isBlogger;
         await User.update({
           id: user.id
         }, {
