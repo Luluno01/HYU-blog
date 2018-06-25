@@ -41,6 +41,38 @@ module.exports.policies = {
     
     //Require requests to come from a logged-in Blog Owner user or admin
     'update': ['isLoggedIn', 'authority']
-  }
+  },
 
+  NoticeController: {
+    //Require requests to come from a logged-in admin user
+    'create': ['isLoggedIn', 'isAdmin', 'isOwner'],
+
+    //Require requests to come from a logged-in admin user
+    'delete': ['isLoggedIn', 'isAdmin'],
+    
+    //Require requests to come from a logged-in admin user
+    'update': ['isLoggedIn', 'isAdmin']
+  },
+
+  AlbumController: {
+    //Require requests to come from a logged-in Album Owner user
+    'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
+
+    //Require requests to come from a logged-in Album Owner user or admin
+    'delete': ['isLoggedIn', 'authority'],
+    
+    //Require requests to come from a logged-in Album Owner user or admin
+    'update': ['isLoggedIn', 'authority']
+  }，
+
+  PhotoController: {
+    //Require requests to come from a logged-in Photo Owner user
+    'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
+
+    //Require requests to come from a logged-in Photo Owner user or admin
+    'delete': ['isLoggedIn', 'authority'],
+    
+    //Require requests to come from a logged-in Photo Owner user or admin
+    'update': ['isLoggedIn', 'authority']
+  }
 };
