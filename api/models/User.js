@@ -45,5 +45,10 @@ module.exports = {
 
     // sails.log.debug(user.id, dynamicSalt, password);
     return await sails.helpers.sha512(dynamicSalt + user.password) == password.toString();
+  },
+
+  customToJSON: function(keyName) {
+    // Return a shallow copy of this record with the password, username and salt removed.
+    return _.omit(this, ['password', 'username', 'salt']);
   }
 };

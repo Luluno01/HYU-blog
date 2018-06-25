@@ -23,8 +23,13 @@ module.exports.policies = {
     'logout': 'isLoggedIn',
 
     //Require requests to come from a logged-in Blog Owner user or admin
-    'reset': 'isLoggedIn'
+    'reset': 'isLoggedIn',
 
+    'find': false,
+
+    'create': false,
+
+    'delete':  ['isLoggedIn', 'isAdmin']
   },
 
   BlogController: {
@@ -32,10 +37,10 @@ module.exports.policies = {
     'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
 
     //Require requests to come from a logged-in Blog Owner user or admin
-    'delete': 'authority',
+    'delete': ['isLoggedIn', 'authority'],
     
     //Require requests to come from a logged-in Blog Owner user or admin
-    'update': 'authority'
+    'update': ['isLoggedIn', 'authority']
   }
 
 };
