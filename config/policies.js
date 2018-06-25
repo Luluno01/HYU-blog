@@ -63,7 +63,7 @@ module.exports.policies = {
     
     //Require requests to come from a logged-in Album Owner user or admin
     'update': ['isLoggedIn', 'authority']
-  }，
+  },
 
   PhotoController: {
     //Require requests to come from a logged-in Photo Owner user
@@ -74,5 +74,36 @@ module.exports.policies = {
     
     //Require requests to come from a logged-in Photo Owner user or admin
     'update': ['isLoggedIn', 'authority']
+  },
+
+  BallotController: {
+    //Require requests to come from a logged-in Ballot Owner user
+    'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
+
+    //Require requests to come from a logged-in Ballot Owner user or admin
+    'delete': ['isLoggedIn', 'authority'],
+    
+    //Require requests to come from a logged-in Ballot Owner user or admin
+    'update': ['isLoggedIn', 'authority']
+  },
+
+  OptionController: {
+    //Require requests to come from a logged-in Option Owner user
+    'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
+
+    //Require requests to come from a logged-in Option Owner user or admin
+    'delete': ['isLoggedIn', 'authority'],
+    
+    //Require requests to come from a logged-in Option Owner user or admin
+    'update': ['isLoggedIn', 'authority']
+  },
+
+  BallotrecordController: {
+    //Require requests to come from a logged-in Ballotrecord Owner user
+    'create': ['isLoggedIn', 'isOwner'],
+
+    //Require requests to come from a logged-in Ballotrecord Owner user or admin
+    'delete': ['isLoggedIn', 'isAdmin'],
+    
   }
 };

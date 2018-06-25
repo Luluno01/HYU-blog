@@ -10,8 +10,10 @@ module.exports = {
     },
     votes: {
       type: 'number',
-      required: true,
       defaultsTo: 0
+    },
+    owner: {
+      model: 'user'
     }
     
   }
