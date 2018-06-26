@@ -105,5 +105,14 @@ module.exports.policies = {
     //Require requests to come from a logged-in Ballotrecord Owner user or admin
     'delete': ['isLoggedIn', 'isAdmin'],
     
+  },
+
+  CommentController: {
+    //Require requests to come from a logged-in user
+    'create': ['isLoggedIn', 'isOwner', 'haveBlog', 'haveComment', 'isBlongingtoblog'],
+
+    //Require requests to come from a logged-in  comment or Blog Owner or admin
+    'delete': ['isLoggedIn', 'authority_delete_comment'],
+    
   }
 };

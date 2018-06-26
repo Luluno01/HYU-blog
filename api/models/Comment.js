@@ -1,16 +1,23 @@
 module.exports = {
   schema: true,
   attributes: {
-    title: {
-      type: 'string',
-      required: true
-    },
     text: {
       type: 'string',
       required: true
     },
+
+    blog: {
+      model: 'blog',
+      required: true
+    },
+
+    comment: {
+      model: 'comment'
+    },
+
     owner: {
-      model: 'user'  // Foreign key
+      model: 'user',  // Foreign key
+      required: true
     }
   }
 };
