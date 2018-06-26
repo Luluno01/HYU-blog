@@ -112,7 +112,7 @@ module.exports.policies = {
     'create': ['isLoggedIn', 'isOwner', 'haveBlog', 'haveComment', 'isBelongingtoblog'],
 
     //Require requests to come from a logged-in  comment or Blog Owner or admin
-    'delete': ['isLoggedIn', 'authority_delete_comment'],
+    'delete': ['isLoggedIn', 'authorityDeleteComment'],
     
   }
 };

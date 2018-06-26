@@ -1,5 +1,5 @@
 module.exports = async function(req, res, next) {
-  
+  //The photo that want to be deleted must be related to it's album.
     
   let ballot = await Ballot.findOne({ id: req.param('ballot') })
   .intercept(err => {

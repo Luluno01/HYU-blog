@@ -1,5 +1,5 @@
 module.exports = async function(req, res, next) {
-  
+  //The comment that want to be deleted must be related to it's blog.
   if(req.param('comment')){
     
     let blog = await Blog.findOne({ id: req.param('blog') })

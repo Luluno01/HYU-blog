@@ -1,4 +1,5 @@
 module.exports = async function(req, res, next) {
+  //Is this id a blogger?
   let currentUser = await User.findOne({ id: req.session.login })
   .intercept(err => {
     sails.log.error('Cannot find user');
