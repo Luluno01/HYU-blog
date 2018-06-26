@@ -2,13 +2,16 @@ module.exports = {
   schema: true,
   attributes: {
     ballot: {
-      model: 'ballot'
+      model: 'ballot',
+      required: true
     },
-    user: {
-      model: 'user'
+    owner: {
+      model: 'user',
+      required: true
     },
     option: {
-      model: 'option'
+      model: 'option',
+      required: true
     }
   }
 }

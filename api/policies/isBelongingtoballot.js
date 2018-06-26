@@ -1,6 +1,5 @@
 module.exports = async function(req, res, next) {
-  
-    
+  //Option must belong to an existing ballot in ballotrecord
   let ballot = await Ballot.findOne({ id: req.param('ballot') })
   .intercept(err => {
     sails.log.error('Cannot find ballot');

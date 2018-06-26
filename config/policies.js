@@ -89,7 +89,7 @@ module.exports.policies = {
 
   OptionController: {
     //Require requests to come from a logged-in Option Owner user
-    'create': ['isLoggedIn', 'isBlogger', 'isOwner', 'isBelongingtoballot'],
+    'create': ['isLoggedIn', 'isBlogger', 'isOwner', 'haveBallot'],
 
     //Require requests to come from a logged-in Option Owner user or admin
     'delete': ['isLoggedIn', 'authority'],
@@ -100,10 +100,10 @@ module.exports.policies = {
 
   BallotrecordController: {
     //Require requests to come from a logged-in Ballotrecord Owner user
-    'create': ['isLoggedIn', 'isOwner'],
+    'create': ['isLoggedIn', 'isOwner', 'isBelongingtoballot', 'isUnique', 'addOptionvotes'],
 
     //Require requests to come from a logged-in Ballotrecord Owner user or admin
-    'delete': ['isLoggedIn', 'isAdmin'],
+    'delete': ['isLoggedIn', 'isAdmin', 'subOptionvotes'],
     
   },
 

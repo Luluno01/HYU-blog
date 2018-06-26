@@ -14,7 +14,8 @@ module.exports = {
       defaultsTo: true
     },
     owner: {
-      model: 'user'  // Foreign key
+      model: 'user',  // Foreign key
+      required: true
     }
     
   }
