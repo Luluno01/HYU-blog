@@ -6,7 +6,8 @@ module.exports = {
       required: true
     },
     ballot: {
-      model: 'ballot'
+      model: 'ballot',
+      required: true
     },
     votes: {
       type: 'number',

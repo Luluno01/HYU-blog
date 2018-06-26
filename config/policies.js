@@ -89,7 +89,7 @@ module.exports.policies = {
 
   OptionController: {
     //Require requests to come from a logged-in Option Owner user
-    'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
+    'create': ['isLoggedIn', 'isBlogger', 'isOwner', 'isBelongingtoballot'],
 
     //Require requests to come from a logged-in Option Owner user or admin
     'delete': ['isLoggedIn', 'authority'],
@@ -109,7 +109,7 @@ module.exports.policies = {
 
   CommentController: {
     //Require requests to come from a logged-in user
-    'create': ['isLoggedIn', 'isOwner', 'haveBlog', 'haveComment', 'isBlongingtoblog'],
+    'create': ['isLoggedIn', 'isOwner', 'haveBlog', 'haveComment', 'isBelongingtoblog'],
 
     //Require requests to come from a logged-in  comment or Blog Owner or admin
     'delete': ['isLoggedIn', 'authority_delete_comment'],
