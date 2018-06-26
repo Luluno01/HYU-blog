@@ -22,7 +22,6 @@ module.exports = {
   exits: C.EXITS.DEFAULT,
 
 
-  // Warning: Session leak
   fn: async function (inputs, exits) {
 
     await Option.destroy(inputs)

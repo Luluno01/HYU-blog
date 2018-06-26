@@ -1,4 +1,4 @@
-const C = require('Convention.js');
+const C = require('Convention');
 
 
 module.exports = {
@@ -18,9 +18,9 @@ module.exports = {
     },
 
     title: {
-      description: 'Update title.',
+      description: 'Option\'s title.',
       type: 'string',
-      required: false
+      required: true
     }
 
   },
@@ -29,17 +29,12 @@ module.exports = {
   exits: C.EXITS.DEFAULT,
 
 
-  // Warning: Session leak
   fn: async function (inputs, exits) {
-    if(!inputs.title){
-      exits.failed('No update infomation.');
-    }
-
     if(inputs.title){
       await Option.update({ id : inputs.id })
       .set({ title : inputs.title })
       .intercept(err => {
-        sails.log.error('Cannot update option\'s title.');
+        sails.log.error('Cannot update option.');
         sails.log.error(err);
         return err;
       });

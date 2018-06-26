@@ -22,12 +22,11 @@ module.exports = {
   exits: C.EXITS.DEFAULT,
 
 
-  // Warning: Session leak
   fn: async function (inputs, exits) {
 
     await Ballot.destroy(inputs)
     .intercept(err => {
-      sails.log.error('Cannot destory Ballot.');
+      sails.log.error('Cannot destory ballot.');
       sails.log.error(err);
       return err;
     });

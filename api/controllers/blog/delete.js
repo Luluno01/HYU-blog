@@ -1,4 +1,4 @@
-const C = require('Convention.js');
+const C = require('Convention');
 
 
 module.exports = {
@@ -22,7 +22,6 @@ module.exports = {
   exits: C.EXITS.DEFAULT,
 
 
-  // Warning: Session leak
   fn: async function (inputs, exits) {
 
     await Blog.destroy(inputs)
