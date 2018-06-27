@@ -59,21 +59,19 @@ module.exports.policies = {
     'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
 
     //Require requests to come from a logged-in Album Owner user or admin
-    'delete': ['isLoggedIn', 'authority'],
+    'delete': ['isLoggedIn', 'authorityUpdateAlbum'],
     
     //Require requests to come from a logged-in Album Owner user or admin
-    'update': ['isLoggedIn', 'authority']
+    'update': ['isLoggedIn', 'authorityUpdateAlbum']
   },
 
   PhotoController: {
     //Require requests to come from a logged-in Photo Owner user
-    'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
+    'upload': ['isLoggedIn', 'isOwner', 'isRightAlbum'],
 
     //Require requests to come from a logged-in Photo Owner user or admin
-    'delete': ['isLoggedIn', 'authority'],
+    'delete': ['isLoggedIn', 'authorityDeletePhoto'],
     
-    //Require requests to come from a logged-in Photo Owner user or admin
-    'update': ['isLoggedIn', 'authority']
   },
 
   BallotController: {

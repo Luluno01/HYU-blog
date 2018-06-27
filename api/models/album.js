@@ -11,9 +11,6 @@ module.exports = {
     },
     owner: {
       model: 'user'  // Foreign key
-    },
-    cover: {
-      model: 'photo'
     }
   }
 };

@@ -1,0 +1,45 @@
+const C = require('Convention');
+
+
+module.exports = {
+
+
+  friendlyName: 'Show',
+
+
+  description: 'Show photo.',
+
+
+  inputs: {
+    id: {
+      description: 'Photo\'s id.',
+      type: 'number',
+      required: true
+    }
+  },
+
+
+  exits: C.EXITS.DEFAULT,
+
+  fn: function (inputs, exits) {
+    sails.log.debug(this.res);
+    exits.success();
+    // Photo.findOne({ id: req.param('id') }).exec(function (err, photo){
+    //   if (err) return res.serverError(err);
+    //   if (!photo) return res.notFound();
+  
+    //   var SkipperDisk = require('skipper-disk');
+    //   var fileAdapter = SkipperDisk(/* optional opts */);
+  
+    //   // set the filename to the same file as the user uploaded
+    //   res.set("Content-disposition", "attachment; filename='" + file.name + "'");
+  
+    //   // Stream the file down
+    //   fileAdapter.read(photo.path)
+    //   .on('error', function (err){
+    //     return res.serverError(err);
+    //   })
+    //   .pipe(res);
+    // });
+  }
+};
