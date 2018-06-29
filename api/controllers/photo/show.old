@@ -19,27 +19,33 @@ module.exports = {
   },
 
 
-  exits: C.EXITS.DEFAULT,
+  exits: {
+    ...C.EXITS.DEFAULT,
+    notFound: C.EXITS.DEFAULT_NOT_FOUND
+  },
 
-  fn: function (inputs, exits) {
-    sails.log.debug(this.res);
+  fn: async function (inputs, exits) {
+    let photo = await Photo.findOne({ id: inputs.id })
+    .intercept(err => {
+      sails.log.error('Cannot find photo');
+      sails.log.error(err);
+      return err;
+    });
+    
+    if(!photo) return exits.notFound('Photo not found');
+
+    var SkipperDisk = require('skipper-disk');
+    var fileAdapter = SkipperDisk(/* optional opts */);
+
+    // Set the filename to the same file as the user uploaded
+    this.res.set('Content-type', 'image/jpg');
+
+    // Stream the file down
+    fileAdapter.read(photo.path)
+    .on('error', function (err){
+      return res.serverError(err);
+    })
+    .pipe(res);
     exits.success();
-    // Photo.findOne({ id: req.param('id') }).exec(function (err, photo){
-    //   if (err) return res.serverError(err);
-    //   if (!photo) return res.notFound();
-  
-    //   var SkipperDisk = require('skipper-disk');
-    //   var fileAdapter = SkipperDisk(/* optional opts */);
-  
-    //   // set the filename to the same file as the user uploaded
-    //   res.set("Content-disposition", "attachment; filename='" + file.name + "'");
-  
-    //   // Stream the file down
-    //   fileAdapter.read(photo.path)
-    //   .on('error', function (err){
-    //     return res.serverError(err);
-    //   })
-    //   .pipe(res);
-    // });
   }
 };

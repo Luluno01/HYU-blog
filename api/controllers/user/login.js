@@ -73,7 +73,7 @@ module.exports = {
           session.login = user.id;
           session.isBlogger = user.isBlogger;
           sails.log.info(`User ${user.username} logged in`);
-          return exits.success(M.LOGGED_IN);
+          return exits.success({ ...M.LOGGED_IN, id: user.id });
         } else return exits.failed(M.USERNAME_OR_PASSWORD_INCORRECT);
       } catch {
         return exits.failed(M.USERNAME_OR_PASSWORD_INCORRECT);
