@@ -20,7 +20,14 @@ module.exports = {
 
 
   fn: async function (inputs, exits) {
-    return exits.success(this.req.session.login ? '1' : '0');
+    if(!this.req.login) return exits.success({})
+    let user = await User.findOne({ id: this.req.login })
+    .intercept(err => {
+      sails.log.error('Cannot find user')
+      sails.log.error(err)
+      return err
+    })
+    return exits.success(user);
 
   }
 
