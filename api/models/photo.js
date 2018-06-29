@@ -1,6 +1,7 @@
 module.exports = {
   schema: true,
   attributes: {
+
     path: {
       type: 'string',
       required: true

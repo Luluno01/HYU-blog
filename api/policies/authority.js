@@ -1,5 +1,7 @@
 module.exports = async function(req, res, next) {
   //is admin or blog's owner
+  sails.log.debug(req.session.login);
+  sails.log.debug(req.param('id'));
   let currentUser = await User.findOne({ id: req.session.login })
   .intercept(err => {
     sails.log.error('Cannot find user');
