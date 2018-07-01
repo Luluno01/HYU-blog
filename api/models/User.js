@@ -139,5 +139,27 @@ module.exports = {
       wt.appendBody([user.id, user.username, user.nickname, user.isBlogger, user.isAdmin]);
     }
     sails.log.info('\n' + wt.string());
+  },
+
+  async deleteUser(criteria) {
+    await User.destroy(criteria)
+    .intercept(err => {
+      sails.log.error('Cannot delete user.');
+      sails.log.error(err);
+      return err;
+    });
+    let users = await User.find()
+    .intercept(err => {
+      sails.log.error('Cannot list users.');
+      sails.log.error(err);
+      return err;
+    });
+    let header = ['id', 'username', 'nickname', 'isBlogger', 'isAdmin'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let user of users) {
+      wt.appendBody([user.id, user.username, user.nickname, user.isBlogger, user.isAdmin]);
+    }
+    sails.log.info('\n' + wt.string());
   }
 };
