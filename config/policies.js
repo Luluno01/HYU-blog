@@ -82,7 +82,7 @@ module.exports.policies = {
     'delete': ['isLoggedIn', 'authorityDeleteBallot'],
     
     //Require requests to come from a logged-in Ballot Owner user or admin
-    'update': ['isLoggedIn', 'authorityDeleteBallot']
+    'update': ['isLoggedIn']
   },
 
   OptionController: {
