@@ -1,3 +1,5 @@
+const WordTable = require('word-table');
+
 module.exports = {
   schema: true,
   attributes: {
@@ -20,15 +22,15 @@ module.exports = {
     
   },
 
-  async listBallot(criteria) {
-    let ballot = await Ballot.findone(criteria)
+  async listDetailBallot(criteria) {
+    let ballot = await Ballot.findOne(criteria)
     .intercept(err => {
       sails.log.error('Cannot list ballot.');
       sails.log.error(err);
       return err;
     });
 
-    let option = await Option.find({ballot: ballot.id})
+    let options = await Option.find({ballot: ballot.id})
     .intercept(err => {
       sails.log.error('Cannot list option.');
       sails.log.error(err);
@@ -43,4 +45,21 @@ module.exports = {
     }
     sails.log.info('\n' + ballot.title + wt.string());
   },
+
+  async listBallot(criteria) {
+    let ballots = await Ballot.find(criteria)
+    .intercept(err => {
+      sails.log.error('Cannot list ballot.');
+      sails.log.error(err);
+      return err;
+    });
+
+    let header = ['title', 'text', 'published', 'owner'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let ballot of ballots) {
+      wt.appendBody([ballot.title, ballot.text, ballot.published, ballot.owner]);
+    }
+    sails.log.info('\n' + ballot.title + wt.string());
+  }
 }
