@@ -79,10 +79,10 @@ module.exports.policies = {
     'create': ['isLoggedIn', 'isBlogger', 'isOwner'],
 
     //Require requests to come from a logged-in Ballot Owner user or admin
-    'delete': ['isLoggedIn', 'authority'],
+    'delete': ['isLoggedIn', 'authorityDeleteBallot'],
     
     //Require requests to come from a logged-in Ballot Owner user or admin
-    'update': ['isLoggedIn', 'authority']
+    'update': ['isLoggedIn', 'authorityDeleteBallot']
   },
 
   OptionController: {
