@@ -54,12 +54,12 @@ module.exports = {
       return err;
     });
 
-    let header = ['title', 'text', 'published', 'owner'];
+    let header = ['id','title', 'text', 'published', 'owner'];
     let body = [];
     let wt = new WordTable(header, body);
     for(let ballot of ballots) {
-      wt.appendBody([ballot.title, ballot.text, ballot.published, ballot.owner]);
+      wt.appendBody([ballot.id, ballot.title, ballot.text, ballot.published, ballot.owner]);
     }
-    sails.log.info('\n' + ballot.title + wt.string());
+    sails.log.info('\n' + wt.string());
   }
 }
