@@ -39,7 +39,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    let ballot = await Ballot.create({title: inputs.title, text: inputs.text, pubilshed: inputs.pubilshed, owner: inputs.owner}).fetch
+    let ballot = await Ballot.create({title: inputs.title, text: inputs.text, pubilshed: inputs.pubilshed, owner: inputs.owner}).fetch()
     .intercept(err => {
       sails.log.error('Cannot create ballot.');
       sails.log.error(err);
