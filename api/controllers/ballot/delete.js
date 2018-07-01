@@ -37,9 +37,8 @@ module.exports = {
       });
     }
 
-    let ballotrecord = await ballotrecord.find({ ballot: inputs.id });
+    let ballotrecord = await Ballotrecord.find({ ballot: inputs.id });
 
-    let i = 0;
     for(i = 0; i < ballotrecord.length; i++){
 
       await Ballotrecord.destroy({id: ballotrecord[i].id})
