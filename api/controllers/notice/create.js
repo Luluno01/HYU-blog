@@ -34,7 +34,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    await Blog.create({title: inputs.title, text: inputs.text, owner: inputs.owner})
+    await Notice.create({title: inputs.title, text: inputs.text, owner: inputs.owner})
     .intercept(err => {
       sails.log.error('Cannot create notice.');
       sails.log.error(err);

@@ -1,3 +1,5 @@
+const WordTable = require('word-table');
+
 module.exports = {
   schema: true,
   attributes: {
@@ -21,14 +23,14 @@ module.exports = {
   },
 
   async listBallot(criteria) {
-    let ballot = await Ballot.findone(criteria)
+    let ballot = await Ballot.findOne(criteria)
     .intercept(err => {
       sails.log.error('Cannot list ballot.');
       sails.log.error(err);
       return err;
     });
 
-    let option = await Option.find({ballot: ballot.id})
+    let options = await Option.find({ballot: ballot.id})
     .intercept(err => {
       sails.log.error('Cannot list option.');
       sails.log.error(err);
@@ -41,6 +43,6 @@ module.exports = {
     for(let option of options) {
       wt.appendBody([option.title, option.votes]);
     }
-    sails.log.info('\n' + ballot.title + wt.string());
+    sails.log.info('\n' + ballot.title+ '\n' + wt.string());
   },
 }

@@ -34,7 +34,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    await Ballotrecord.create({title: inputs.title, ballot: inputs.ballot, owner: inputs.owner})
+    await Option.create({title: inputs.title, ballot: inputs.ballot, owner: inputs.owner})
     .intercept(err => {
       sails.log.error('Cannot create option.');
       sails.log.error(err);
