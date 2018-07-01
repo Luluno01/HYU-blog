@@ -43,7 +43,7 @@ module.exports = {
     for(let option of options) {
       wt.appendBody([option.title, option.votes]);
     }
-    sails.log.info('\n' + ballot.title + wt.string());
+    sails.log.info('\n' + ballot.title + '\n' + wt.string());
   },
 
   async listBallot(criteria) {

@@ -85,5 +85,29 @@ module.exports = {
       wt.appendBody([blog.id, blog.title, blog.text, blog.published, blog.owner]);
     }
     sails.log.info('\n' + wt.string());
-  }
+  },
+
+  async listDetailBlog(criteria) {
+    let blog = await Blog.findOne(criteria)
+    .intercept(err => {
+      sails.log.error('Cannot list blog.');
+      sails.log.error(err);
+      return err;
+    });
+
+    let comments = await Comment.find({blog: blog.id})
+    .intercept(err => {
+      sails.log.error('Cannot list comment.');
+      sails.log.error(err);
+      return err;
+    });
+
+    let header = ['text', 'owner'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let comment of comments) {
+      wt.appendBody([comment.text, comment.owner]);
+    }
+    sails.log.info('\n' + blog.title + '\n' + wt.string());
+  },
 };
