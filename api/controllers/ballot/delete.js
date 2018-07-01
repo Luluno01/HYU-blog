@@ -29,7 +29,7 @@ module.exports = {
     let i = 0;
     for(i = 0; i < ballotOption.length; i++){
 
-      await Option.destroy(ballotOption[i].id)
+      await Option.destroy({id: ballotOption[i].id})
       .intercept(err => {
         sails.log.error('Cannot destory option.');
         sails.log.error(err);
@@ -42,7 +42,7 @@ module.exports = {
     let i = 0;
     for(i = 0; i < ballotrecord.length; i++){
 
-      await Option.destroy(ballotrecord[i].id)
+      await Ballotrecord.destroy({id: ballotrecord[i].id})
       .intercept(err => {
         sails.log.error('Cannot destory ballotrecord.');
         sails.log.error(err);

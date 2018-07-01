@@ -23,7 +23,17 @@ module.exports = {
 
 
   fn: async function (inputs, exits) {
-
+    let blogComment = await Comment.find({ blog: inputs.id });
+    let i = 0;
+    for(i = 0; i < blogComment.length; i++){
+      await Comment.destroy({id: blogComment[i].id})
+      .intercept(err => {
+        sails.log.error('Cannot destory blog Comment.');
+        sails.log.error(err);
+        return err;
+      });
+    }
+    
     await Blog.destroy(inputs)
     .intercept(err => {
       sails.log.error('Cannot destory blog.');
@@ -31,6 +41,7 @@ module.exports = {
       return err;
     });
     exits.success();
+
   }
 
 
