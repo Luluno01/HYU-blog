@@ -1,3 +1,5 @@
+const WordTable = require('word-table');
+
 module.exports = {
   schema: true,
   attributes: {
@@ -50,5 +52,38 @@ module.exports = {
       sails.log.error(err);
       return err;
     });
+  },
+
+  async listBlog(criteria) {
+    let blogs = await Blog.find(criteria)
+    .intercept(err => {
+      sails.log.error('Cannot list blog.');
+      sails.log.error(err);
+      return err;
+    });
+    let header = ['id', 'title', 'text', 'published', 'owner'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let blog of blogs) {
+      wt.appendBody([blog.id, blog.title, blog.text, blog.published, blog.owner]);
+    }
+    sails.log.info('\n' + wt.string());
+  },
+
+  async deleteBlog(criteria) {
+    await Blog.destroy(criteria)
+    .intercept(err => {
+      sails.log.error('Cannot list blog.');
+      sails.log.error(err);
+      return err;
+    });
+    let blogs = await Blog.find()
+    let header = ['id', 'title', 'text', 'published', 'owner'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let blog of blogs) {
+      wt.appendBody([blog.id, blog.title, blog.text, blog.published, blog.owner]);
+    }
+    sails.log.info('\n' + wt.string());
   }
 };

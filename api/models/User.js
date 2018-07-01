@@ -1,3 +1,4 @@
+const WordTable = require('word-table');
 const assert = require('assert');
 
 
@@ -50,5 +51,93 @@ module.exports = {
   customToJSON: function(keyName) {
     // Return a shallow copy of this record with the password, username and salt removed.
     return _.omit(this, ['password', 'username', 'salt']);
+  },
+
+  /**
+   * @author Zezhong Xu
+   * @description List user. 
+   */
+  async listUser(criteria) {
+    let users = await User.find(criteria)
+    .intercept(err => {
+      sails.log.error('Cannot list users.');
+      sails.log.error(err);
+      return err;
+    });
+    let header = ['id', 'username', 'nickname', 'isBlogger', 'isAdmin'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let user of users) {
+      wt.appendBody([user.id, user.username, user.nickname, user.isBlogger, user.isAdmin]);
+    }
+    sails.log.info('\n' + wt.string());
+  },
+
+  async setBlogger(criteria) {
+    let users = await User.update(criteria).set({ isBlogger: true }).fetch()
+    .intercept(err => {
+      sails.log.error('Cannot update users.');
+      sails.log.error(err);
+      return err;
+    });
+
+    let header = ['id', 'username', 'nickname', 'isBlogger', 'isAdmin'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let user of users) {
+      wt.appendBody([user.id, user.username, user.nickname, user.isBlogger, user.isAdmin]);
+    }
+    sails.log.info('\n' + wt.string());
+  },
+
+  async setNotBlogger(criteria) {
+    let users = await User.update(criteria).set({ isBlogger: false }).fetch()
+    .intercept(err => {
+      sails.log.error('Cannot update users.');
+      sails.log.error(err);
+      return err;
+    });
+
+    let header = ['id', 'username', 'nickname', 'isBlogger', 'isAdmin'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let user of users) {
+      wt.appendBody([user.id, user.username, user.nickname, user.isBlogger, user.isAdmin]);
+    }
+    sails.log.info('\n' + wt.string());
+  },
+
+  async setAdmin(criteria) {
+    let users = await User.update(criteria).set({ isAdmin: true }).fetch()
+    .intercept(err => {
+      sails.log.error('Cannot update users.');
+      sails.log.error(err);
+      return err;
+    });
+
+    let header = ['id', 'username', 'nickname', 'isBlogger', 'isAdmin'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let user of users) {
+      wt.appendBody([user.id, user.username, user.nickname, user.isBlogger, user.isAdmin]);
+    }
+    sails.log.info('\n' + wt.string());
+  },
+
+  async setNotAdmin(criteria) {
+    let users = await User.update(criteria).set({ isAdmin: false }).fetch()
+    .intercept(err => {
+      sails.log.error('Cannot update users.');
+      sails.log.error(err);
+      return err;
+    });
+
+    let header = ['id', 'username', 'nickname', 'isBlogger', 'isAdmin'];
+    let body = [];
+    let wt = new WordTable(header, body);
+    for(let user of users) {
+      wt.appendBody([user.id, user.username, user.nickname, user.isBlogger, user.isAdmin]);
+    }
+    sails.log.info('\n' + wt.string());
   }
 };
